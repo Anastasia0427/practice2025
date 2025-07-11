@@ -14,7 +14,11 @@ public class FlightProcessing {
                             .filter(record -> record .flightNumber() == flightNumber)
                             .mapToInt(FamilyRecord::familyAmount)
                             .sum();
-                    System.out.println("flight " + flightNumber + ": " + count + " passengers");
+                    if (count == 0) {
+                        System.out.println("flight " + flightNumber + ": no data found");
+                    } else {
+                        System.out.println("flight " + flightNumber + ": " + count + " passengers");
+                    }
                 });
     }
 
