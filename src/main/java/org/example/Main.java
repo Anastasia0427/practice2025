@@ -76,6 +76,6 @@ public class Main {
         }
 
         FlightProcessing.countPeopleByFlight(flightData.getRecords());
-        scanner.close();;
+        scanner.close();
     }
 }
