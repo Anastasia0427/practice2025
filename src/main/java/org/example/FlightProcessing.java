@@ -2,7 +2,6 @@ package org.example;
 
 import java.util.List;
 
-
 public class FlightProcessing {
 
     public static void countPeopleByFlight(List<FamilyRecord> records) {
