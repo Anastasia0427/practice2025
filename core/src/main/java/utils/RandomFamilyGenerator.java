@@ -12,14 +12,19 @@ public class RandomFamilyGenerator {
     private static final int FAMILY_MIN = 1;
     private static final int FAMILY_MAX = 9;
 
+    private static Random random = new Random();  // Делаем поле изменяемым
+
+    public static void setRandom(Random random) {
+        RandomFamilyGenerator.random = random;
+    }
+
     public static FamilyRecord generateRandomFamily() {
-        Random random = new Random();
         int flightNumber = random.nextInt(FLIGHT_MIN, FLIGHT_MAX);
         int familyAmount = random.nextInt(FAMILY_MIN, FAMILY_MAX);
 
         logger.debug("Сгенерирована случайная семья: рейс " + flightNumber
                 + ", " + familyAmount + " человек");
-
         return new FamilyRecord(flightNumber, familyAmount);
     }
+
 }
