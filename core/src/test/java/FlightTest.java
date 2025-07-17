@@ -2,12 +2,18 @@ import model.FamilyRecord;
 import model.Flight;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import utils.RandomFamilyGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 public class FlightTest {
     private Flight flight;
     private FamilyRecord testRecord1;
@@ -136,4 +142,22 @@ public class FlightTest {
         assertEquals(2, flight.getRecords().size(),
                 "Изменение копии списка не должно влиять на оригинальный список");
     }
+
+    @Test
+    void testFlightConstructorCallsGenerator() {
+        Random mockRandom = mock(Random.class);
+        when(mockRandom.nextInt(1, 11)).thenReturn(5);  // Всегда возвращает рейс №5
+        when(mockRandom.nextInt(1, 9)).thenReturn(3);   // Всегда 3 человека в семье
+
+        RandomFamilyGenerator.setRandom(mockRandom);
+
+        Flight flight = new Flight(10);
+
+        verify(mockRandom, times(10)).nextInt(1, 11); // Проверка вызова для номера рейса
+        verify(mockRandom, times(10)).nextInt(1, 9);  // Проверка вызова для размера семьи
+
+        assertEquals(10, flight.getRecords().size());
+        assertTrue(flight.getRecords().stream().allMatch(r -> r.flightNumber() == 5 && r.familyAmount() == 3));
+    }
+
 }

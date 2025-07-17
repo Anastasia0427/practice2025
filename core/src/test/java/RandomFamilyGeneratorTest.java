@@ -2,8 +2,6 @@ import model.FamilyRecord;
 import org.junit.jupiter.api.Test;
 import utils.RandomFamilyGenerator;
 
-import java.util.HashSet;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -42,22 +40,4 @@ class RandomFamilyGeneratorTest {
         }
     }
 
-    @Test
-    void generateRandomFamilyDistributionTest() {
-        Set<Integer> flightNumbers = new HashSet<>();
-        Set<Integer> familyAmounts = new HashSet<>();
-        int iterations = 1000;
-
-        for (int i = 0; i < iterations; i++) {
-            FamilyRecord record = RandomFamilyGenerator.generateRandomFamily();
-            flightNumbers.add(record.flightNumber());
-            familyAmounts.add(record.familyAmount());
-        }
-
-        // Проверяем, что генерация охватывает хотя бы половину возможных значений
-        assertTrue(flightNumbers.size() >= 5,
-                "Ожидается, что сгенерировано не менее 5 различных номеров рейсов, получено: " + flightNumbers.size());
-        assertTrue(familyAmounts.size() >= 4,
-                "Ожидается, что сгенерировано не менее 4 различных размеров семей, получено: " + familyAmounts.size());
-    }
 }

@@ -1,11 +1,14 @@
 import model.FamilyRecord;
-import org.junit.jupiter.api.Test;
 import service.FlightProcessing;
+import org.junit.jupiter.api.Test;
+
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
 
 class FlightProcessingTest {
 
